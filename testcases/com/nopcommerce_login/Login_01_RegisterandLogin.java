@@ -64,6 +64,7 @@ public class Login_01_RegisterandLogin {
 	  Assert.assertEquals(resultText, "Your registration completed");
 	  Thread.sleep(2000);
 	  driver.findElement(By.cssSelector(".ico-logout")).click();
+	  Thread.sleep(2000);
 	 
   }
   
