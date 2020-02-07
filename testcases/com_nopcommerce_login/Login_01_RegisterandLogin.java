@@ -1,4 +1,4 @@
-package com.nopcommerce.login;
+package com_nopcommerce_login;
 
 import org.testng.annotations.Test;
 import org.testng.annotations.BeforeTest;
