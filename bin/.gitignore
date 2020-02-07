@@ -1,4 +1,2 @@
-/RunNopCommerceTestcases.xml
-/chromedriver 2
 /com/
-/geckodriver
+/com_nopcommerce_login/
