@@ -1,4 +1,4 @@
-package com_nopcommerce_login;
+package com.nopcommerce.login;
 
 import org.testng.annotations.Test;
 import org.testng.annotations.BeforeTest;
@@ -22,8 +22,14 @@ public class Login_01_RegisterandLogin {
  
   @BeforeTest
   public void beforeTest() {
-    String projectPath = System.getProperty("user.dir");
-	System.setProperty("webdriver.chrome.driver", projectPath + "/resources/chromedriver 2");
+	  String osName = System.getProperty("os.name");
+	  if (osName.toLowerCase().contains("mac")) {
+		  System.setProperty("webdriver.chrome.driver", "./resources/chromedriver 2");
+		
+	} else {
+		System.setProperty("webdriver.chrome.driver", ".//resources//chromedriver 2");
+	}
+ 
 	driver = new ChromeDriver();
 	
 	driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
