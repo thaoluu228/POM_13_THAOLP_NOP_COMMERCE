@@ -4,6 +4,7 @@
 		<classes>
 <!-- 			<class name="com.nopcommerce.login.Login_01_RegisterandLogin_Declare" /> -->
 <!-- 			<class name="com.nopcommerce.login.Login_02_RegisterandLogin_AbstractPage_Extend" /> -->
+<!-- 			<class name="com.nopcommerce.login.Login_03_RegisterandLogin_AbstractPage_Page_Object" /> -->
 			<class name="com.nopcommerce.login.Login_03_RegisterandLogin_AbstractPage_Page_Object" />
 		</classes>
 	</test>

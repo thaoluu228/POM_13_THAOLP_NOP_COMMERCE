@@ -1,10 +1,9 @@
 package com.nopcommerce.login;
 
 import org.testng.annotations.Test;
-import commons.AbstractPages;
-import pageObjects.HomePage;
-import pageObjects.LoginPage;
-import pageObjects.RegisterPage;
+import pageObjects.nopCommerce.HomePage;
+import pageObjects.nopCommerce.LoginPage;
+import pageObjects.nopCommerce.RegisterPage;
 
 import org.testng.annotations.BeforeTest;
 
@@ -16,7 +15,7 @@ import org.openqa.selenium.firefox.FirefoxDriver;
 import org.testng.Assert;
 import org.testng.annotations.AfterTest;
 
-public class Login_03_RegisterandLogin_AbstractPage_Page_Object extends AbstractPages {
+public class Login_03_RegisterandLogin_AbstractPage_Page_Object {
 	private WebDriver driver;
 	private String email, password, registerSuccessMsg;
 	private HomePage homePage;
@@ -35,9 +34,8 @@ public class Login_03_RegisterandLogin_AbstractPage_Page_Object extends Abstract
 	  driver = new ChromeDriver();
   
 //	  driver = new FirefoxDriver();
-	
-
-	  openUrl(driver, "https://demo.nopcommerce.com/");
+	  
+	  driver.get("https://demo.nopcommerce.com/");
 	
 	  driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
 	  driver.manage().window().maximize();

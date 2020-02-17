@@ -3,7 +3,7 @@ package pageObjects.nopCommerce;
 import org.openqa.selenium.WebDriver;
 
 import commons.AbstractPages;
-import pageUI.RegisterPageUI;
+import pageUI.nopCommerce.RegisterPageUI;
 
 public class RegisterPage extends AbstractPages {
 	private WebDriver driver;
