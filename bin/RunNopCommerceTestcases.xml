@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<suite parallel="false" name="Nop Commerce">
-	<test name="Run on Chrome">
-		<classes>
-<!-- 			<class name="com.nopcommerce.login.Login_01_RegisterandLogin_Declare" /> -->
-			<class name="com.nopcommerce.login.Login_02_RegisterandLogin_AbstractPage_Extend" />
-		</classes>
-	</test>
-</suite> 
