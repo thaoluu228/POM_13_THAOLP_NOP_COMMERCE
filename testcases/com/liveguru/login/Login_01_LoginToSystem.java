@@ -59,19 +59,58 @@ public class Login_01_LoginToSystem {
   
   @Test
   public void TC_02_LoginInvalidEmail() {
+	  loginPage = homePage.clickToMyAccount();
 	  
+	  loginPage.inputToEmailTextBox("thaoluu@y123.123");
+	  
+	  loginPage.inputToPassword("");
+	  
+	  loginPage.clickToLoginButton();
+	  
+	  Assert.assertTrue(loginPage.isInvalidEmailMsgErrorDisplayed("Please enter a valid email address. For example johndoe@domain.com."));
   }
   
   @Test
   public void TC_03_LoginIncorrectEmail() {
+      loginPage = homePage.clickToMyAccount();
+	  
+	  loginPage.inputToEmailTextBox("thaoluu1@yopmail.com");
+	  
+	  loginPage.inputToPassword("123456");
+	  
+	  loginPage.clickToLoginButton();
+	  
+	  Assert.assertTrue(loginPage.isIncorrectdEmailMsgErrorDisplayed("Invalid login or password."));
 	  
   }
   
   @Test
-  public void TC_04_LoginWithPasswordLessThan6Chars() {
+  public void TC_04_LoginWithPasswordLessThan6Chars() throws InterruptedException {
+      loginPage = homePage.clickToMyAccount();
 	  
+	  loginPage.inputToEmailTextBox("thaoluu1@yopmail.com");
+	  
+	  loginPage.inputToPassword("12345");
+	  
+	  loginPage.clickToLoginButton();
+	  Thread.sleep(1000);
+	  
+	  Assert.assertTrue(loginPage.isLessThan6PassMsgErrorDisplayed("Please enter 6 or more characters without leading or trailing spaces."));
   }
   
+  @Test
+  public void TC_05_LoginCorrectEmailAndPassword() {
+      loginPage = homePage.clickToMyAccount();
+	  
+	  loginPage.inputToEmailTextBox("thaoluu@yopmail.com");
+	  
+	  loginPage.inputToPassword("123456");
+	  //click to login -> my dashboard
+	  dashboardPage = loginPage.clickToLoginButton();
+	  
+	  Assert.assertTrue(dashboardPage.isFullnameOrEmailDisplayed("thao luu phuong"));
+	  //Assert.assertTrue(dashboardPage.isFullnameOrEmailDisplayed("thaoluu@yopmail.com"));
+  }
 
   @AfterClass
   public void afterClass() {
