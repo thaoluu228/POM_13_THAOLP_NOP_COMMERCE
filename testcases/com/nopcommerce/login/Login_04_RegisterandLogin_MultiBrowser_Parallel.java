@@ -1,11 +1,14 @@
 package com.nopcommerce.login;
 
 import org.testng.annotations.Test;
+
+import commons.AbstractTest;
 import pageObjects.nopCommerce.HomePage;
 import pageObjects.nopCommerce.LoginPage;
 import pageObjects.nopCommerce.RegisterPage;
-
+import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.annotations.BeforeTest;
+import org.testng.annotations.Parameters;
 
 import java.util.Random;
 import java.util.concurrent.TimeUnit;
@@ -14,32 +17,21 @@ import org.openqa.selenium.firefox.FirefoxDriver;
 import org.testng.Assert;
 import org.testng.annotations.AfterTest;
 
-public class Login_03_RegisterandLogin_AbstractPage_Page_Object {
+public class Login_04_RegisterandLogin_MultiBrowser_Parallel extends AbstractTest {
 	private WebDriver driver;
 	private String email, password, registerSuccessMsg;
 	private HomePage homePage;
 	private LoginPage loginPage;
 	private RegisterPage registerPage;
 	
-  @BeforeTest
-  public void beforeTest() {
-	  String osName = System.getProperty("os.name");
-	  if (osName.toLowerCase().contains("mac")) {
-//		  System.setProperty("webdriver.chrome.driver", "./resources/chromedriver 2");
-		System.setProperty("webdriver.gecko.driver", "./resources/geckodriver 2");
-	  } else {
-		System.setProperty("webdriver.chrome.driver", ".//resources//chromedriver 2");
-	}
-//	  driver = new ChromeDriver();
-	  
-  
-	  driver = new FirefoxDriver();
-	  
-	  driver.get("https://demo.nopcommerce.com/");
 	
-	  driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
-	  driver.manage().window().maximize();
+  @Parameters({ "browser" , "url" })
+  @BeforeTest
+  public void beforeTest(String browserName, String autUrl ) {
 	  
+	  driver = getBrowserDriver(browserName, autUrl);
+	  
+	  driver.manage().window().maximize();
 	  homePage = new HomePage(driver);
 	
 	  email = "thaoluu" + randomNumber() + "@yopmail.com";
