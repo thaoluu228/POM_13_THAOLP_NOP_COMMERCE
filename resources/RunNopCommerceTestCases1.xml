@@ -8,19 +8,18 @@
 <!-- 			<class name="com.nopcommerce.login.Login_01_RegisterandLogin_Declare" /> -->
 <!-- 			<class name="com.nopcommerce.login.Login_02_RegisterandLogin_AbstractPage_Extend" /> -->
 <!-- 			<class name="com.nopcommerce.login.Login_03_RegisterandLogin_AbstractPage_Page_Object" /> -->
-			<class name="com.nopcommerce.login.Login_04_RegisterandLogin_MultiBrowser_Parallel" />
+			<class name="com.nopcommerce.login.Login_06_RegisterandLogin_Action_Chain" />
 		</classes>
 	</test>
 	
-	<test name="Run on Chrome">
-	<parameter name="browser" value="chrome"/>
-		<classes>
+<!--     <test name="Run on Chrome">  -->
+<!-- 	<parameter name="browser" value="chrome"/> -->
+<!-- 		<classes> -->
 <!-- 			<class name="com.nopcommerce.login.Login_01_RegisterandLogin_Declare" /> -->
 <!-- 			<class name="com.nopcommerce.login.Login_02_RegisterandLogin_AbstractPage_Extend" /> -->
 <!-- 			<class name="com.nopcommerce.login.Login_03_RegisterandLogin_AbstractPage_Page_Object" /> -->
-<!-- 			<class name="com.nopcommerce.login.Login_03_RegisterandLogin_AbstractPage_Page_Object" /> -->
-			<class name="com.nopcommerce.login.Login_04_RegisterandLogin_MultiBrowser_Parallel" />
-		</classes>
-	</test>
+<!-- 			<class name="com.nopcommerce.login.Login_06_RegisterandLogin_Action_Chain" /> -->
+<!-- 		</classes> -->
+<!-- 	</test> -->
 	
 </suite> 

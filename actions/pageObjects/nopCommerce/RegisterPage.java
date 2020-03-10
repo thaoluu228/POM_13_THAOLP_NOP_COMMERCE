@@ -3,6 +3,7 @@ package pageObjects.nopCommerce;
 import org.openqa.selenium.WebDriver;
 
 import commons.AbstractPages;
+import commons.PageGeneratorManager;
 import pageUI.nopCommerce.RegisterPageUI;
 
 public class RegisterPage extends AbstractPages {
@@ -84,7 +85,7 @@ public class RegisterPage extends AbstractPages {
 	public HomePage clickToLogoutLink() {
 		waitToElementClickable(driver, RegisterPageUI.LOGOUT_LINK);
 		clickToElement(driver, RegisterPageUI.LOGOUT_LINK);
-		return new HomePage(driver);
+		return PageGeneratorManager.getHomePageObject(driver);
 	}
 
 }

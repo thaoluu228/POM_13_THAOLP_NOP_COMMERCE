@@ -12,6 +12,13 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import pageObjects.nopCommerce.FooterMyAccountPage;
+import pageObjects.nopCommerce.FooterNewProduct;
+import pageObjects.nopCommerce.FooterSearch;
+import pageObjects.nopCommerce.HomePage;
+import pageUI.nopCommerce.AbstractPageUI;
+
+
 public class AbstractPages {
 	private long longTimeout = 30;
 	private Select select;
@@ -164,5 +171,30 @@ public class AbstractPages {
 		element = findElementByXpath(driver, locator);
 		waitExplicit = new WebDriverWait(driver, longTimeout);
 		waitExplicit.until(ExpectedConditions.elementToBeClickable(By.xpath(locator)));
+	}
+	
+	public FooterMyAccountPage openMyAccountPage(WebDriver driver) {
+		waitToElementClickable(driver, AbstractPageUI.FOOTER_MY_ACCOUNT_LINK);
+		clickToElement(driver, AbstractPageUI.FOOTER_MY_ACCOUNT_LINK);
+		return PageGeneratorManager.getFooterMyAccountPage(driver);
+	}
+
+
+	public FooterSearch openFooterSearchPage(WebDriver driver) {
+		waitToElementClickable(driver, AbstractPageUI.FOOTER_SEARCH_LINK);
+		clickToElement(driver, AbstractPageUI.FOOTER_SEARCH_LINK);
+		return PageGeneratorManager.getFooterSearch(driver);
+	}
+	
+	public FooterNewProduct openNewProductPage(WebDriver driver) {
+		waitToElementClickable(driver, AbstractPageUI.FOOTER_NEW_PRODUCT_LINK);
+		clickToElement(driver, AbstractPageUI.FOOTER_NEW_PRODUCT_LINK);
+		return PageGeneratorManager.getFooterNewProduct(driver);
+	}
+	
+	public HomePage openHomePage(WebDriver driver) {
+		waitToElementClickable(driver, AbstractPageUI.HOME_PAGE);
+		clickToElement(driver, AbstractPageUI.HOME_PAGE);
+		return PageGeneratorManager.getHomePageObject(driver);
 	}
 }

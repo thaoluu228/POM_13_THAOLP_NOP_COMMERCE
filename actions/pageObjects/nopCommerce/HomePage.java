@@ -4,6 +4,7 @@ package pageObjects.nopCommerce;
 import org.openqa.selenium.WebDriver;
 
 import commons.AbstractPages;
+import commons.PageGeneratorManager;
 import pageUI.nopCommerce.HomePageUI;
 
 public class HomePage extends AbstractPages {
@@ -17,19 +18,20 @@ public class HomePage extends AbstractPages {
 	public RegisterPage clickToRegisterLink() {
 		waitToElementClickable(driver, HomePageUI.REGISTER_LINK);
 		clickToElement(driver, HomePageUI.REGISTER_LINK);
-		return new RegisterPage(driver);
+		return PageGeneratorManager.getRegisterPageObject(driver);
 	}
 
 	public LoginPage clickToLoginLink() {
 		waitToElementClickable(driver, HomePageUI.LOGIN_LINK);
 		clickToElement(driver, HomePageUI.LOGIN_LINK);
-		return new LoginPage(driver);
+		return PageGeneratorManager.getLoginPageObject(driver);
 	}
 
 	public boolean isMyAccountLinkDisplayed() {
 		waitToElementClickable(driver, HomePageUI.MY_ACCOUNT_LINK);
 		return isElementDisplayed(driver, HomePageUI.MY_ACCOUNT_LINK);
 	}
+
 
 	
 
