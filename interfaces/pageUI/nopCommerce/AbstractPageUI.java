@@ -6,4 +6,6 @@ public class AbstractPageUI {
 	public static final String FOOTER_NEW_PRODUCT_LINK = "//a[contains(text(),'New products')]";
 	public static final String FOOTER_MY_ACCOUNT_LINK = "//div[@class='footer']//a[text()='My account']";
 
+	//1 locator
+	public static final String DYNAMIC_FOOTER_LINK = "//div[@class='footer']//a[text()='%s']";
 }

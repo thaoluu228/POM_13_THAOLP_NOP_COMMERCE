@@ -25,7 +25,7 @@ public class AbstractPages {
 	private Actions action;
 	private WebElement element;
 	private WebDriverWait waitExplicit;
-	
+	private By byXpath;
 	
 	//Mo ra 1 url tu ben ngoai
 	public void openUrl (WebDriver driver, String url) {
@@ -75,12 +75,35 @@ public class AbstractPages {
 		return driver.findElement(By.xpath(locator));
 	}
 	
+	public WebElement findElementByXpath (WebDriver driver, String locator, String...values) {
+		locator = String.format(locator, (Object[]) values);
+		return driver.findElement(By.xpath(locator));
+	}
+	
+	public List<WebElement> findElementsByXpath (WebDriver driver, String locator, String...values) {
+		locator = String.format(locator, (Object[])values);
+		return driver.findElements(By.xpath(locator));
+	}
+	
 	public List<WebElement> findElementsByXpath (WebDriver driver, String locator) {
 		return driver.findElements(By.xpath(locator));
 	}
 	
 	public void clickToElement (WebDriver driver, String locator) {
 		findElementByXpath(driver, locator).click();
+	}
+	
+	public By byXpathLocator (String locator) {
+		return By.xpath(locator);
+	}
+	
+	public By byXpathLocator (String locator, String...values) {
+		locator = String.format(locator, (Object[])values);
+		return By.xpath(locator);
+	}
+	
+	public void clickToElement (WebDriver driver, String locator, String...values) {
+		findElementByXpath(driver,locator, values).click();
 	}
 	
 	public void sendkeyToElement (WebDriver driver, String locator, String value) {
@@ -162,15 +185,27 @@ public class AbstractPages {
 	}
 	
 	public void waitToElementDisplayed (WebDriver driver, String locator) {
-		element = findElementByXpath(driver, locator);
+		byXpath = byXpathLocator(locator);
 		waitExplicit = new WebDriverWait(driver, longTimeout);
-		waitExplicit.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(locator)));
+		waitExplicit.until(ExpectedConditions.visibilityOfElementLocated(byXpath));
+	}
+	
+	public void waitToElementDisplayed (WebDriver driver, String locator, String...values) {
+		byXpath = byXpathLocator(locator, values);
+		waitExplicit = new WebDriverWait(driver, longTimeout);
+		waitExplicit.until(ExpectedConditions.visibilityOfElementLocated(byXpath));
 	}
 	
 	public void waitToElementClickable (WebDriver driver, String locator) {
-		element = findElementByXpath(driver, locator);
+		byXpath = byXpathLocator(locator);
 		waitExplicit = new WebDriverWait(driver, longTimeout);
-		waitExplicit.until(ExpectedConditions.elementToBeClickable(By.xpath(locator)));
+		waitExplicit.until(ExpectedConditions.elementToBeClickable(byXpath));
+	}
+	
+	public void waitToElementClickable (WebDriver driver, String locator, String...values) {
+		byXpath = byXpathLocator(locator, values);
+		waitExplicit = new WebDriverWait(driver, longTimeout);
+		waitExplicit.until(ExpectedConditions.elementToBeClickable(byXpath));
 	}
 	
 	public FooterMyAccountPage openMyAccountPage(WebDriver driver) {
@@ -196,5 +231,27 @@ public class AbstractPages {
 		waitToElementClickable(driver, AbstractPageUI.HOME_PAGE);
 		clickToElement(driver, AbstractPageUI.HOME_PAGE);
 		return PageGeneratorManager.getHomePageObject(driver);
+	}
+	
+	//truong hop it page (10-15 pages)
+	public AbstractPages openFooterSearchByName (WebDriver driver, String pageName) {
+		waitToElementDisplayed(driver, AbstractPageUI.DYNAMIC_FOOTER_LINK, pageName);
+		clickToElement(driver, AbstractPageUI.DYNAMIC_FOOTER_LINK, pageName);
+		switch (pageName) {
+		case "Search":
+			return PageGeneratorManager.getFooterSearch(driver);
+		case "New products":
+			return PageGeneratorManager.getFooterNewProduct(driver);
+		default:
+			return PageGeneratorManager.getFooterMyAccountPage(driver);
+			
+		}
+		
+	}
+	
+	//truong hop nhieu page
+	public void openFootersSearchByName (WebDriver driver, String pageName) {
+		waitToElementDisplayed(driver, AbstractPageUI.DYNAMIC_FOOTER_LINK, pageName);
+		clickToElement(driver, AbstractPageUI.DYNAMIC_FOOTER_LINK, pageName);
 	}
 }

@@ -19,7 +19,7 @@ import org.openqa.selenium.firefox.FirefoxDriver;
 import org.testng.Assert;
 import org.testng.annotations.AfterTest;
 
-public class Login_06_RegisterandLogin_Action_Chain {
+public class Login_07_RegisterandLogin_Dynamic_Locator {
 	private WebDriver driver;
 	private String email, password, registerSuccessMsg;
 	private HomePage homePage;
@@ -107,17 +107,37 @@ public class Login_06_RegisterandLogin_Action_Chain {
   }
   
   @Test
-  public void TC_03_ActionChain() {
+  public void TC_03_Dynamic_Less() {
 	  //homepage -> my account (footer)
-	  myAccountPage = homePage.openMyAccountPage(driver);
+	  myAccountPage = (FooterMyAccountPage) homePage.openFooterSearchByName(driver, "My account");
 	  //my account -> search
-	  searchPage = myAccountPage.openFooterSearchPage(driver);
+	  searchPage = (FooterSearch) myAccountPage.openFooterSearchByName(driver, "Search");
 	  //search -> new product
-	  newProductPage = searchPage.openNewProductPage(driver);
+	  newProductPage = (FooterNewProduct) searchPage.openFooterSearchByName(driver, "New products");
 	  //new product -> homepage
 	   homePage = newProductPage.openHomePage(driver);
 	  //homepage -> search
-	  searchPage = homePage.openFooterSearchPage(driver);
+	  searchPage = (FooterSearch) homePage.openFooterSearchByName(driver, "Search");
+  }
+  
+  @Test
+  public void TC_04_Dynamic_More() {
+	  //homepage -> my account (footer)
+	  homePage.openFootersSearchByName(driver, "My account");
+	  myAccountPage = PageGeneratorManager.getFooterMyAccountPage(driver);
+	  
+	  //my account -> search
+	  myAccountPage.openFootersSearchByName(driver, "Search");
+	  searchPage = PageGeneratorManager.getFooterSearch(driver);
+	  
+	  //search -> new product
+	  searchPage.openFootersSearchByName(driver, "New products");
+	  newProductPage = PageGeneratorManager.getFooterNewProduct(driver);
+	  
+	  //new product -> homepage
+	   homePage = newProductPage.openHomePage(driver);
+	  //homepage -> search
+	  searchPage = (FooterSearch) homePage.openFooterSearchByName(driver, "Search");
   }
 
   @AfterTest
