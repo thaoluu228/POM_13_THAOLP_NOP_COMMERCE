@@ -67,6 +67,11 @@ public class AbstractPages {
 		return findElementByXpath(driver, locator).getText();
 	}
 	
+	public String getTextElement (WebDriver driver, String locator, String...values) {
+		locator = String.format(locator, (Object[])values);
+		return findElementByXpath(driver, locator).getText();
+	}
+	
 	public void sendkeyToAlert (WebDriver driver, String value) {
 		driver.switchTo().alert().sendKeys(value);
 	}
@@ -102,11 +107,17 @@ public class AbstractPages {
 		return By.xpath(locator);
 	}
 	
-	public void clickToElement (WebDriver driver, String locator, String...values) {
+	public void clickToElement (WebDriver driver, String locator, String...values){
 		findElementByXpath(driver,locator, values).click();
 	}
 	
 	public void sendkeyToElement (WebDriver driver, String locator, String value) {
+		findElementByXpath(driver, locator).clear();
+		findElementByXpath(driver, locator).sendKeys(value);
+	}
+	
+	public void sendkeyToElement (WebDriver driver, String locator, String value, String...values) {
+		findElementByXpath(driver, locator, values).clear();
 		findElementByXpath(driver, locator).sendKeys(value);
 	}
 	
@@ -119,6 +130,11 @@ public class AbstractPages {
 	}
 	
 	public boolean isElementDisplayed (WebDriver driver, String locator) {
+		return findElementByXpath(driver, locator).isDisplayed();
+	}
+	
+	public boolean isElementDisplayed (WebDriver driver, String locator, String...values) {
+		locator = String.format(locator, (Object[]) values);
 		return findElementByXpath(driver, locator).isDisplayed();
 	}
 
