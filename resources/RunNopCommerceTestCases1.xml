@@ -5,19 +5,13 @@
 	<test name="Run on Firefox">
 	<parameter name="browser" value="firefox"/>
 		<classes>
-<!-- 			<class name="com.nopcommerce.login.Login_01_RegisterandLogin_Declare" /> -->
-<!-- 			<class name="com.nopcommerce.login.Login_02_RegisterandLogin_AbstractPage_Extend" /> -->
-<!-- 			<class name="com.nopcommerce.login.Login_03_RegisterandLogin_AbstractPage_Page_Object" /> -->
-			<class name="com.nopcommerce.login.Login_07_RegisterandLogin_Dynamic_Locator" />
+			<class name="com.nopcommerce.login.Login_08_RegisterandLogin_Undisplayed" />
 		</classes>
 	</test>
 	
 <!--     <test name="Run on Chrome">  -->
 <!-- 	<parameter name="browser" value="chrome"/> -->
 <!-- 		<classes> -->
-<!-- 			<class name="com.nopcommerce.login.Login_01_RegisterandLogin_Declare" /> -->
-<!-- 			<class name="com.nopcommerce.login.Login_02_RegisterandLogin_AbstractPage_Extend" /> -->
-<!-- 			<class name="com.nopcommerce.login.Login_03_RegisterandLogin_AbstractPage_Page_Object" /> -->
 <!-- 			<class name="com.nopcommerce.login.Login_06_RegisterandLogin_Action_Chain" /> -->
 <!-- 		</classes> -->
 <!-- 	</test> -->

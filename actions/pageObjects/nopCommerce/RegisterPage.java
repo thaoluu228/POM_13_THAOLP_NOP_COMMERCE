@@ -88,4 +88,20 @@ public class RegisterPage extends AbstractPages {
 		return PageGeneratorManager.getHomePageObject(driver);
 	}
 
+	public boolean isFirstnameTextboxDisplayed() {
+		waitToElementDisplayed(driver, "//input[@id='FirstName']");
+		return isElementDisplayed(driver, "//input[@id='FirstName']");
+		
+	}
+
+	public boolean isRequestUndisplayed() {
+		waitToElementInvisible(driver, "//input[@name='__RequestVerificationToken']");
+		return isElementDisplayed(driver, "//input[@name='__RequestVerificationToken']");
+	}
+
+	public boolean isRegisterUndisplayed() {
+		waitToElementInvisible(driver, "//input[@class='button-1 register-button']");
+		return isElementDisplayed(driver, "//input[@class='button-1 register-button']");
+	}
+
 }

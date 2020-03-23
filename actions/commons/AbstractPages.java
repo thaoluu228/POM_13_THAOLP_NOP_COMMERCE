@@ -1,10 +1,12 @@
 package commons;
 
+import java.util.Date;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
+import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
@@ -20,12 +22,13 @@ import pageUI.nopCommerce.AbstractPageUI;
 
 
 public class AbstractPages {
-	private long longTimeout = 30;
+	private long longTimeout = 20;
 	private Select select;
 	private Actions action;
 	private WebElement element;
 	private WebDriverWait waitExplicit;
 	private By byXpath;
+	private Date date;
 	
 	//Mo ra 1 url tu ben ngoai
 	public void openUrl (WebDriver driver, String url) {
@@ -130,12 +133,22 @@ public class AbstractPages {
 	}
 	
 	public boolean isElementDisplayed (WebDriver driver, String locator) {
-		return findElementByXpath(driver, locator).isDisplayed();
+		try {
+			  element = findElementByXpath(driver, locator);
+			  return element.isDisplayed();	  
+		} catch (Exception ex) {
+			return false;
+		}
 	}
 	
 	public boolean isElementDisplayed (WebDriver driver, String locator, String...values) {
 		locator = String.format(locator, (Object[]) values);
-		return findElementByXpath(driver, locator).isDisplayed();
+		try {
+			  element = findElementByXpath(driver, locator, values);
+			  return element.isDisplayed();	  
+		} catch (Exception ex) {
+			return false;
+		}
 	}
 
 	public void hoverMouseToElement (WebDriver driver, String locator) {
@@ -200,6 +213,10 @@ public class AbstractPages {
 		}
 	}
 	
+	public void overrideGlobalTimeout(WebDriver driver, long timeOut) {
+		driver.manage().timeouts().implicitlyWait(timeOut, TimeUnit.SECONDS);
+	}
+	
 	public void waitToElementDisplayed (WebDriver driver, String locator) {
 		byXpath = byXpathLocator(locator);
 		waitExplicit = new WebDriverWait(driver, longTimeout);
@@ -210,6 +227,22 @@ public class AbstractPages {
 		byXpath = byXpathLocator(locator, values);
 		waitExplicit = new WebDriverWait(driver, longTimeout);
 		waitExplicit.until(ExpectedConditions.visibilityOfElementLocated(byXpath));
+	}
+	
+	public void waitToElementInvisible (WebDriver driver, String locator) {
+		date = new Date();
+		byXpath = byXpathLocator(locator);
+		waitExplicit = new WebDriverWait(driver, GlobalConstants.SHORT_TIMEOUT);
+		overrideGlobalTimeout(driver, GlobalConstants.SHORT_TIMEOUT);
+		try {
+			System.out.println("Start time for wait invisible = " + date.toString());
+			waitExplicit.until(ExpectedConditions.invisibilityOfElementLocated(byXpath));
+		} catch (TimeoutException ex) {
+			ex.printStackTrace();
+		}
+		System.out.println("End time for wait invisible = " + date.toString());
+		overrideGlobalTimeout(driver, GlobalConstants.LONG_TIMEOUT);
+		
 	}
 	
 	public void waitToElementClickable (WebDriver driver, String locator) {
@@ -248,6 +281,8 @@ public class AbstractPages {
 		clickToElement(driver, AbstractPageUI.HOME_PAGE);
 		return PageGeneratorManager.getHomePageObject(driver);
 	}
+	
+	
 	
 	//truong hop it page (10-15 pages)
 	public AbstractPages openFooterSearchByName (WebDriver driver, String pageName) {
