@@ -40,9 +40,6 @@ public class Login_08_RegisterandLogin_Undisplayed extends AbstractTest {
    public void beforeTest(String browserName, String autUrl ) {
 		  
 		  driver = getBrowserDriver(browserName, autUrl);
-		  
-	  driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
-	  driver.manage().window().maximize();
 	  
 	  homePage = PageGeneratorManager.getHomePageObject(driver);
 	
@@ -68,7 +65,6 @@ public class Login_08_RegisterandLogin_Undisplayed extends AbstractTest {
   @Test
   public void TC_03_CheckUndisplayed_Not_In_Dom() {
 	  //ko co trong DOM
-	  registerPage.isRegisterUndisplayed();
 	  Assert.assertFalse(registerPage.isRegisterUndisplayed());
   }
 

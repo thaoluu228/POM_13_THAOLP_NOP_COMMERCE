@@ -22,7 +22,6 @@ import pageUI.nopCommerce.AbstractPageUI;
 
 
 public class AbstractPages {
-	private long longTimeout = 20;
 	private Select select;
 	private Actions action;
 	private WebElement element;
@@ -33,7 +32,6 @@ public class AbstractPages {
 	//Mo ra 1 url tu ben ngoai
 	public void openUrl (WebDriver driver, String url) {
 		driver.get(url);
-		driver.manage().timeouts().implicitlyWait(longTimeout, TimeUnit.SECONDS);
 		driver.manage().window().maximize();
 		
 	}
@@ -137,6 +135,7 @@ public class AbstractPages {
 			  element = findElementByXpath(driver, locator);
 			  return element.isDisplayed();	  
 		} catch (Exception ex) {
+			ex.printStackTrace();
 			return false;
 		}
 	}
@@ -147,6 +146,7 @@ public class AbstractPages {
 			  element = findElementByXpath(driver, locator, values);
 			  return element.isDisplayed();	  
 		} catch (Exception ex) {
+			ex.printStackTrace();
 			return false;
 		}
 	}
@@ -219,13 +219,13 @@ public class AbstractPages {
 	
 	public void waitToElementDisplayed (WebDriver driver, String locator) {
 		byXpath = byXpathLocator(locator);
-		waitExplicit = new WebDriverWait(driver, longTimeout);
+		waitExplicit = new WebDriverWait(driver, GlobalConstants.LONG_TIMEOUT);
 		waitExplicit.until(ExpectedConditions.visibilityOfElementLocated(byXpath));
 	}
 	
 	public void waitToElementDisplayed (WebDriver driver, String locator, String...values) {
 		byXpath = byXpathLocator(locator, values);
-		waitExplicit = new WebDriverWait(driver, longTimeout);
+		waitExplicit = new WebDriverWait(driver, GlobalConstants.LONG_TIMEOUT);
 		waitExplicit.until(ExpectedConditions.visibilityOfElementLocated(byXpath));
 	}
 	
@@ -240,20 +240,20 @@ public class AbstractPages {
 		} catch (TimeoutException ex) {
 			ex.printStackTrace();
 		}
-		System.out.println("End time for wait invisible = " + date.toString());
+		System.out.println("End time for wait invisible = " + new Date().toString());
 		overrideGlobalTimeout(driver, GlobalConstants.LONG_TIMEOUT);
 		
 	}
 	
 	public void waitToElementClickable (WebDriver driver, String locator) {
 		byXpath = byXpathLocator(locator);
-		waitExplicit = new WebDriverWait(driver, longTimeout);
+		waitExplicit = new WebDriverWait(driver, GlobalConstants.LONG_TIMEOUT);
 		waitExplicit.until(ExpectedConditions.elementToBeClickable(byXpath));
 	}
 	
 	public void waitToElementClickable (WebDriver driver, String locator, String...values) {
 		byXpath = byXpathLocator(locator, values);
-		waitExplicit = new WebDriverWait(driver, longTimeout);
+		waitExplicit = new WebDriverWait(driver, GlobalConstants.LONG_TIMEOUT);
 		waitExplicit.until(ExpectedConditions.elementToBeClickable(byXpath));
 	}
 	
