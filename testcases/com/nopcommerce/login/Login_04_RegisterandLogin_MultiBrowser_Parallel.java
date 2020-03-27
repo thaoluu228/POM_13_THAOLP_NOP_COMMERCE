@@ -3,6 +3,7 @@ package com.nopcommerce.login;
 import org.testng.annotations.Test;
 
 import commons.AbstractTest;
+import commons.PageGeneratorManager;
 import pageObjects.nopCommerce.HomePage;
 import pageObjects.nopCommerce.LoginPage;
 import pageObjects.nopCommerce.RegisterPage;
@@ -31,8 +32,7 @@ public class Login_04_RegisterandLogin_MultiBrowser_Parallel extends AbstractTes
 	  
 	  driver = getBrowserDriver(browserName, autUrl);
 	  
-	  driver.manage().window().maximize();
-	  homePage = new HomePage(driver);
+	  homePage = PageGeneratorManager.getHomePageObject(driver);
 	
 	  email = "thaoluu" + randomNumber() + "@yopmail.com";
 	  password = "310228";
