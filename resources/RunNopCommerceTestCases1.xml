@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <suite parallel="false" name="Nop Commerce">
 <parameter name="url" value="https://demo.nopcommerce.com/"></parameter>
-	
+	<parameter name="browser" value="firefox"/>
 	<listeners>
 		<listener class-name ="org.uncommons.reportng.HTMLReporter" />
 		<listener class-name ="org.uncommons.reportng.JUnitXMLReporter" />
@@ -10,10 +10,11 @@
 		<listener class-name ="reportConfig.ExtentTestListenerV4" />
 	</listeners>
 
-	<test name="Run on Chrome">
-	<parameter name="browser" value="chrome"/>
+	<test name="Run on Firefox">
+	<parameter name="browser" value="firefox"/>
 		<classes>
-			<class name="com.nopcommerce.login.Login_04_RegisterandLogin_MultiBrowser_Parallel" />
+			<class name="com.nopcommerce.login.Login_11_RegisterandLogin_Dynamic_Element" />
+<!-- 		    <class name="com.nopcommerce.common.Common_01_RegisterToSystem" /> -->
 		</classes>
 	</test>
 	

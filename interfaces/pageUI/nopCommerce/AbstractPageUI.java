@@ -8,4 +8,15 @@ public class AbstractPageUI {
 
 	//1 locator
 	public static final String DYNAMIC_FOOTER_LINK = "//div[@class='footer']//a[text()='%s']";
+	public static final String DYNAMIC_HEADER_LINK = "//div[@class='header']//a[text()='%s']";
+	public static final String DYNAMIC_HEADER_MENU_LINK = "//div[@class='header-menu']//ul[@class='top-menu notmobile']//a[contains(text(),'%s')]"; 
+	
+	//textbox
+	public static final String DYNAMIC_TEXTBOX = "//input[@id='%s']";
+	
+	//radio button
+	public static final String DYNAMIC_RADIO = "//input[@id='%s']";
+	
+	//dropdown
+	public static final String DYNAMIC_DROPDOWN_LIST = "//select[@name='%s']";
 }

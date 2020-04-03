@@ -118,8 +118,7 @@ public class AbstractPages {
 	}
 	
 	public void sendkeyToElement (WebDriver driver, String locator, String value, String...values) {
-		findElementByXpath(driver, locator, values).clear();
-		findElementByXpath(driver, locator).sendKeys(value);
+		findElementByXpath(driver, locator, values).sendKeys(value);
 	}
 	
 	public int countElementNumber (WebDriver driver, String locator) {
@@ -157,10 +156,22 @@ public class AbstractPages {
 		action.moveToElement(element).perform();
 	}
 	
+	public void hoverMouseToElement (WebDriver driver, String locator, String... values) {
+		action = new Actions(driver);
+		element = findElementByXpath(driver, locator, values);
+		action.moveToElement(element).perform();
+	}
+	
 	public void selectItemInHtmlDropdown (WebDriver driver, String locator, String value) {
 		element = findElementByXpath(driver, locator);
 		select = new Select(element);
 		select.selectByVisibleText(value);
+	}
+	
+	public void selectItemInHtmlDropdown (WebDriver driver, String locator, String valueItem, String... values) {
+		element = findElementByXpath(driver, locator, values);
+		select = new Select(element);
+		select.selectByVisibleText(valueItem);
 	}
 	
 	public WebElement getSelectedItemInHtmlDropdown (WebDriver driver, String locator) {
@@ -304,5 +315,33 @@ public class AbstractPages {
 	public void openFootersSearchByName (WebDriver driver, String pageName) {
 		waitToElementDisplayed(driver, AbstractPageUI.DYNAMIC_FOOTER_LINK, pageName);
 		clickToElement(driver, AbstractPageUI.DYNAMIC_FOOTER_LINK, pageName);
+	}
+	
+	public void openHeaderSearchByName (WebDriver driver, String pageName) {
+		waitToElementDisplayed(driver, AbstractPageUI.DYNAMIC_HEADER_LINK, pageName);
+		clickToElement(driver, AbstractPageUI.DYNAMIC_HEADER_LINK, pageName);
+	}
+	
+	public void openHeaderMenuSearchByName (WebDriver driver, String pageMenuName, String subMenu) {
+		waitToElementDisplayed(driver, AbstractPageUI.DYNAMIC_HEADER_MENU_LINK, pageMenuName);
+		hoverMouseToElement(driver, AbstractPageUI.DYNAMIC_HEADER_MENU_LINK, pageMenuName);
+		waitToElementDisplayed(driver, AbstractPageUI.DYNAMIC_HEADER_MENU_LINK, subMenu);
+		clickToElement(driver, AbstractPageUI.DYNAMIC_HEADER_MENU_LINK, subMenu);
+	}
+	
+	public void inputToTextboxByID (WebDriver driver, String textboxID, String value) {
+		waitToElementDisplayed(driver, AbstractPageUI.DYNAMIC_TEXTBOX, textboxID);
+		sendkeyToElement(driver, AbstractPageUI.DYNAMIC_TEXTBOX, value, textboxID);
+	}
+	
+	public void clickToRadioButtonID (WebDriver driver, String radioButtonID) {
+		waitToElementDisplayed(driver, AbstractPageUI.DYNAMIC_RADIO, radioButtonID);
+		clickToElement(driver, AbstractPageUI.DYNAMIC_RADIO, radioButtonID);
+	}
+	
+	public void selectDropdownByName (WebDriver driver, String dropdownName, String value) {
+		waitToElementDisplayed(driver, AbstractPageUI.DYNAMIC_DROPDOWN_LIST, dropdownName);
+		selectItemInHtmlDropdown(driver, AbstractPageUI.DYNAMIC_DROPDOWN_LIST, value, dropdownName);
+		clickToElement(driver, AbstractPageUI.DYNAMIC_DROPDOWN_LIST, dropdownName);
 	}
 }
