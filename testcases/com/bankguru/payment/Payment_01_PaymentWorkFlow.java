@@ -3,6 +3,9 @@ package com.bankguru.payment;
 import org.testng.annotations.Test;
 
 import commons.AbstractTest;
+import pageObject.bankGuru.BalanceEnquiryPageObject;
+import pageObject.bankGuru.DeleteAccountPageObject;
+import pageObject.bankGuru.DeleteCustomerPageObject;
 import pageObject.bankGuru.DepositPageObject;
 import pageObject.bankGuru.EditAccountPageObject;
 import pageObject.bankGuru.EditCustomerPageObject;
@@ -32,6 +35,9 @@ public class Payment_01_PaymentWorkFlow extends AbstractTest {
 	private DepositPageObject depositPage;
 	private WithdrawlPageObject withdrawPage;
 	private TransferPageObject transferPage;
+	private BalanceEnquiryPageObject balanceEnquiryPage;
+	private DeleteAccountPageObject deleteAccount;
+	private DeleteCustomerPageObject deleteCustomer;
 	
 	String email, customerName, gender, dob, address, city, state, pin, phone, pass, customerID;
 	String editAddress, editCity, editState, editPin, editPhone, editEmail;
@@ -228,7 +234,7 @@ public class Payment_01_PaymentWorkFlow extends AbstractTest {
 		depositPage.inputToTextBoxBankGuruByName(driver, "desc", "nap tien");
 		depositPage.clickToBankGuruButton(driver, "Submit");
 		
-		verifyEquals(depositPage.getBankGuruHeaderText(driver), "Transaction details of Deposit for Account" + firstAccountID);
+		verifyEquals(depositPage.getBankGuruHeaderText(driver), "Transaction details of Deposit for Account " + firstAccountID);
 		verifyEquals(depositPage.getBankGuruRowText(driver, "Account No"), firstAccountID);
 		verifyEquals(depositPage.getBankGuruRowText(driver, "Amount Credited"), "1000");
 		verifyEquals(depositPage.getBankGuruRowText(driver, "Type of Transaction"), "Deposit");
@@ -247,34 +253,81 @@ public class Payment_01_PaymentWorkFlow extends AbstractTest {
 		withdrawPage.inputToTextBoxBankGuruByName(driver, "desc", "rut tien");
 		withdrawPage.clickToBankGuruButton(driver, "Submit");
 		
-		verifyEquals(withdrawPage.getBankGuruHeaderText(driver), "Transaction details of Withdrawal for Account" + firstAccountID);
+		verifyEquals(withdrawPage.getBankGuruHeaderText(driver), "Transaction details of Withdrawal for Account " + firstAccountID);
 		verifyEquals(withdrawPage.getBankGuruRowText(driver, "Account No"), firstAccountID);
 		verifyEquals(withdrawPage.getBankGuruRowText(driver, "Amount Debited"), "500");
 		verifyEquals(withdrawPage.getBankGuruRowText(driver, "Type of Transaction"), "Withdrawal");
 		verifyEquals(withdrawPage.getBankGuruRowText(driver, "Description"), "rut tien");
-		verifyEquals(withdrawPage.getBankGuruRowText(driver, "Current Balance"), "3500");
+		verifyEquals(withdrawPage.getBankGuruRowText(driver, "Current Balance"), "2500");
 
 	}
 
 	@Test
 	public void TC_07_TransferToAnotherAccount() {
 		withdrawPage.openBankGuruPage(driver, "Fund Transfer");
+		transferPage = PageGeneratorManager.getTransferPage(driver);
 		
+		transferPage.inputToTextBoxBankGuruByName(driver, "payersaccount", firstAccountID);
+		transferPage.inputToTextBoxBankGuruByName(driver, "payeeaccount", secondAccountID);
+		transferPage.inputToTextBoxBankGuruByName(driver, "ammount", "1000");
+		transferPage.inputToTextBoxBankGuruByName(driver, "desc", "chuyen tien");
+		transferPage.clickToBankGuruButton(driver, "Submit");
+		
+		verifyEquals(transferPage.getBankGuruHeaderText(driver), "Fund Transfer Details");
+		verifyEquals(transferPage.getBankGuruRowText(driver, "From Account Number"), firstAccountID);
+		verifyEquals(transferPage.getBankGuruRowText(driver, "To Account Number"), secondAccountID);
+		verifyEquals(transferPage.getBankGuruRowText(driver, "Amount"), "1000");
+		verifyEquals(transferPage.getBankGuruRowText(driver, "Description"), "chuyen tien");
 
 	}
 
 	@Test
 	public void TC_08_CheckAccountBalance() {
+		transferPage.openBankGuruPage(driver, "Balance Enquiry");
+		balanceEnquiryPage = PageGeneratorManager.getBalanceEnquiryPage(driver);
+		
+		balanceEnquiryPage.inputToTextBoxBankGuruByName(driver, "accountno", firstAccountID);
+		balanceEnquiryPage.clickToBankGuruButton(driver, "Submit");
+		
+		verifyEquals(balanceEnquiryPage.getBankGuruHeaderText(driver), "Balance Details for Account " + firstAccountID);
+		verifyEquals(balanceEnquiryPage.getBankGuruRowText(driver, "Account No"), firstAccountID);
+		verifyEquals(balanceEnquiryPage.getBankGuruRowText(driver, "Type of Account"), accountSavings);
+		verifyEquals(balanceEnquiryPage.getBankGuruRowText(driver, "Balance"), "1500");
 
 	}
 
 	@Test
 	public void TC_09_DeleteAllAccount() {
+		//delete first account
+		balanceEnquiryPage.openBankGuruPage(driver, "Delete Account");
+		deleteAccount = PageGeneratorManager.getDeleteAccountPage(driver);
+		
+		deleteAccount.inputToTextBoxBankGuruByName(driver, "accountno", firstAccountID);
+		deleteAccount.clickToBankGuruButton(driver, "Submit");
+		
+		verifyTrue(deleteAccount.isAlertTextandAcceptAlert(driver, "Do you really want to delete this Account?"));
+		verifyTrue(deleteAccount.isAlertTextandAcceptAlert(driver, "Account Deleted Sucessfully"));
+		//delete second account
+		deleteAccount.openBankGuruPage(driver, "Delete Account");
+		
+		deleteAccount.inputToTextBoxBankGuruByName(driver, "accountno", secondAccountID);
+		deleteAccount.clickToBankGuruButton(driver, "Submit");
+		
+		verifyTrue(deleteAccount.isAlertTextandAcceptAlert(driver, "Do you really want to delete this Account?"));
+		verifyTrue(deleteAccount.isAlertTextandAcceptAlert(driver, "Account Deleted Sucessfully"));
 
 	}
 
 	@Test
 	public void TC_10_DeleteCustomer() {
+		deleteAccount.openBankGuruPage(driver, "Delete Customer");
+		deleteCustomer = PageGeneratorManager.getDeleteCustomerPage(driver);
+		
+		deleteCustomer.inputToTextBoxBankGuruByName(driver, "cusid", customerID);
+		deleteCustomer.clickToBankGuruButton(driver, "Submit");
+		
+		verifyTrue(deleteCustomer.isAlertTextandAcceptAlert(driver, "Do you really want to delete this Customer?"));
+		verifyTrue(deleteCustomer.isAlertTextandAcceptAlert(driver, "Customer Deleted Sucessfully"));
 
 	}
 

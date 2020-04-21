@@ -393,6 +393,11 @@ public class AbstractPages {
 		overrideGlobalTimeout(driver, GlobalConstants.LONG_TIMEOUT);
 	}
 	
+	public void waitToAlertPresent(WebDriver driver) {
+		waitExplicit = new WebDriverWait(driver, GlobalConstants.LONG_TIMEOUT);
+		waitExplicit.until(ExpectedConditions.alertIsPresent());
+	}
+	
 	public boolean isDataSortedAscending (WebDriver driver, String locator) {
 		//khai bao 1 arraylist
 		ArrayList<String> arrayList = new ArrayList<>();
@@ -670,6 +675,13 @@ public class AbstractPages {
 	public void selectDropdowninBankGuru (WebDriver driver, String dropdownName, String valueItem) {
 		waitToElementVisible(driver, AbstractBackGuruPageUI.DYNAMIC_DROPDOWN, dropdownName);
 		selectItemInHtmlDropdown(driver, AbstractBackGuruPageUI.DYNAMIC_DROPDOWN, valueItem, dropdownName);
+	}
+	
+	public boolean isAlertTextandAcceptAlert (WebDriver driver, String alertText) {
+		waitToAlertPresent(driver);
+		String actualText = getTextAlert(driver);
+		acceptAlert(driver);
+		return actualText.equals(alertText);
 	}
 }
 
