@@ -2,9 +2,9 @@ package com.nopcommerce.login;
 
 import org.testng.annotations.Test;
 
-import commons.PageGeneratorManager;
 import pageObjects.nopCommerce.HomePage;
 import pageObjects.nopCommerce.LoginPage;
+import pageObjects.nopCommerce.PageGeneratorManager;
 import pageObjects.nopCommerce.RegisterPage;
 
 import org.testng.annotations.BeforeTest;

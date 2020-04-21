@@ -1,13 +1,6 @@
-package commons;
+package pageObjects.nopCommerce;
 
 import org.openqa.selenium.WebDriver;
-
-import pageObjects.nopCommerce.FooterMyAccountPage;
-import pageObjects.nopCommerce.FooterNewProduct;
-import pageObjects.nopCommerce.FooterSearch;
-import pageObjects.nopCommerce.HomePage;
-import pageObjects.nopCommerce.LoginPage;
-import pageObjects.nopCommerce.RegisterPage;
 
 public class PageGeneratorManager {
 	
@@ -34,6 +27,10 @@ public class PageGeneratorManager {
 	
 	public static FooterSearch getFooterSearch (WebDriver driver) {
 		return new FooterSearch(driver);
+	}
+	
+	public static DesktopPage getDesktopPage (WebDriver driver) {
+		return new DesktopPage(driver);
 	}
 
 }

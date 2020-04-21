@@ -4,7 +4,6 @@ package pageObjects.nopCommerce;
 import org.openqa.selenium.WebDriver;
 
 import commons.AbstractPages;
-import commons.PageGeneratorManager;
 import pageUI.nopCommerce.HomePageUI;
 
 public class HomePage extends AbstractPages {

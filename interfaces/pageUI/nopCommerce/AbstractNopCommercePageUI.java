@@ -1,6 +1,6 @@
 package pageUI.nopCommerce;
 
-public class AbstractPageUI {
+public class AbstractNopCommercePageUI {
 	public static final String FOOTER_SEARCH_LINK = "//div[@class='footer-block customer-service']//a[text()='Search']";
 	public static final String HOME_PAGE= "//div[@class='header-logo']//img";
 	public static final String FOOTER_NEW_PRODUCT_LINK = "//a[contains(text(),'New products')]";
@@ -19,4 +19,10 @@ public class AbstractPageUI {
 	
 	//dropdown
 	public static final String DYNAMIC_DROPDOWN_LIST = "//select[@name='%s']";
+	
+	//product title
+	public static final String PRODUCT_TITLE = "//h2[@class='product-title']/a[text()='%s']";
+	
+	//product price
+	public static final String PRODUCT_PRICE = "//div[@class='price'//span]";
 }

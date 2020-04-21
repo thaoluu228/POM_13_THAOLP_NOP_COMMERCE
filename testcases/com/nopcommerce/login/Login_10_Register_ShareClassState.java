@@ -5,12 +5,12 @@ import org.testng.annotations.Test;
 import com.nopcommerce.common.Common_01_RegisterToSystem;
 
 import commons.AbstractTest;
-import commons.PageGeneratorManager;
 import pageObjects.nopCommerce.FooterMyAccountPage;
 import pageObjects.nopCommerce.FooterNewProduct;
 import pageObjects.nopCommerce.FooterSearch;
 import pageObjects.nopCommerce.HomePage;
 import pageObjects.nopCommerce.LoginPage;
+import pageObjects.nopCommerce.PageGeneratorManager;
 import pageObjects.nopCommerce.RegisterPage;
 
 import org.testng.annotations.BeforeTest;

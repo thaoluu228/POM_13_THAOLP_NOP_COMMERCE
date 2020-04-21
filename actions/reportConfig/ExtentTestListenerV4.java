@@ -28,7 +28,7 @@ public class ExtentTestListenerV4 implements IReporter {
 	public void generateReport(List<XmlSuite> xmlSuites, List<ISuite> suites, String outputDirectory) {
 		htmlReport = new ExtentHtmlReporter(System.getProperty("user.dir") + "/ExtentReportV4/ExtentReport.html");
 		htmlReport.config().setTheme(Theme.DARK);
-		htmlReport.config().setDocumentTitle("Nop Commerce E2E Testing");
+		htmlReport.config().setDocumentTitle("Bank Guru Payment");
 		htmlReport.config().setReportName("Functional UI");
 		htmlReport.config().setEncoding("utf-8");
 		extent = new ExtentReports();
