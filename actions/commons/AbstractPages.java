@@ -423,34 +423,24 @@ public class AbstractPages {
 	
 	public boolean isDataSortedDescending (WebDriver driver, String locator) {
 		//khai bao 1 arraylist
-		ArrayList<String> arrayList = new ArrayList<>();
+		ArrayList<String> arrayList = new ArrayList<String>();
 		//tim tat ca element matching voi dieu kien
 		List<WebElement> elementList = findElementsByXpath(driver, locator);
 		//lay text cua tung element add vao arraylist
 		for (WebElement element:elementList) {
 			arrayList.add(element.getText());
 		}
-		System.out.println("----------Du lieu tren UI-----------");
-		for (String name:arrayList) {
-			System.out.println(name);
-		}
+		
 		//copy 1 arraylist moi de Sort trong code
-		ArrayList<String> sortedList = new ArrayList<>();
+		ArrayList<String> sortedList = new ArrayList<String>();
 		for (String child:arrayList) {
 			sortedList.add(child);
 		}
 		//thuc hien sort ASC
 		Collections.sort(arrayList);
-		System.out.println("---------Du lieu da sort ASC trong code---------");
-		for (String name:arrayList) {
-			System.out.println(name);
-		}
 		//reverse data de sort desc
 		Collections.reverse(arrayList);
-		System.out.println("---------Du lieu da sort DESC trong code---------");
-		for (String name:arrayList) {
-			System.out.println(name);
-		}
+		
 		//verify 2 array bang nhau - neu du lieu sort tren UI khong chinh xac thi tra ve fail
 		return sortedList.equals(arrayList);
 	}
@@ -535,7 +525,7 @@ public class AbstractPages {
 	}
 	
 	public boolean isNameDataSortedAscendingNop (WebDriver driver) {
-		ArrayList<String> arrayList = new ArrayList<>();
+		ArrayList<String> arrayList = new ArrayList<String>();
 		List<WebElement> elementList = findElementsByXpath(driver, AbstractNopCommercePageUI.PRODUCT_TITLE);
 		for (WebElement element:elementList) {
 			arrayList.add(element.getText());
@@ -557,7 +547,7 @@ public class AbstractPages {
 	}
 	
 	public boolean isNameDataSortedDescendingNop (WebDriver driver) {
-		ArrayList<String> arrayList = new ArrayList<>();
+		ArrayList<String> arrayList = new ArrayList<String>();
 		List<WebElement> elementList = findElementsByXpath(driver, AbstractNopCommercePageUI.PRODUCT_TITLE);
 		for (WebElement element:elementList) {
 			arrayList.add(element.getText());
@@ -584,49 +574,49 @@ public class AbstractPages {
 	}
 	
 	public boolean isPriceDataSortedAscendingNop (WebDriver driver) {
-		ArrayList<String> arrayList = new ArrayList<>();
+		ArrayList<Float> arrayList = new ArrayList<Float>();
 		List<WebElement> elementList = findElementsByXpath(driver, AbstractNopCommercePageUI.PRODUCT_PRICE);
 		for (WebElement element:elementList) {
-			arrayList.add(element.getText());
+			arrayList.add(Float.parseFloat(element.getText().replace("$", "").replace(",", "").trim()));
 		}
 		System.out.println("----------Du lieu tren UI-----------");
-		for (String name:arrayList) {
+		for (Float name:arrayList) {
 			System.out.println(name);
 		}
-		ArrayList<String> sortedList = new ArrayList<>();
-		for (String child:arrayList) {
+		ArrayList<Float> sortedList = new ArrayList<Float>();
+		for (Float child:arrayList) {
 			sortedList.add(child);
 		}
 		Collections.sort(arrayList);
 		System.out.println("---------Du lieu da sort ASC trong code---------");
-		for (String name:arrayList) {
+		for (Float name:arrayList) {
 			System.out.println(name);
 		}
 		return sortedList.equals(arrayList);
 	}
 	
 	public boolean isPriceDataSortedDescendingNop (WebDriver driver) {
-		ArrayList<String> arrayList = new ArrayList<>();
+		ArrayList<Float> arrayList = new ArrayList<Float>();
 		List<WebElement> elementList = findElementsByXpath(driver, AbstractNopCommercePageUI.PRODUCT_PRICE);
 		for (WebElement element:elementList) {
-			arrayList.add(element.getText());
+			arrayList.add(Float.parseFloat(element.getText().replace("$", "").replace(",", "").trim()));
 		}
 		System.out.println("----------Du lieu tren UI-----------");
-		for (String name:arrayList) {
+		for (Float name:arrayList) {
 			System.out.println(name);
 		}
-		ArrayList<String> sortedList = new ArrayList<>();
-		for (String child:arrayList) {
+		ArrayList<Float> sortedList = new ArrayList<Float>();
+		for (Float child:arrayList) {
 			sortedList.add(child);
 		}
 		Collections.sort(arrayList);
 		System.out.println("---------Du lieu da sort ASC trong code---------");
-		for (String name:arrayList) {
+		for (Float name:arrayList) {
 			System.out.println(name);
 		}
 		Collections.reverse(arrayList);
 		System.out.println("---------Du lieu da sort DESC trong code---------");
-		for (String name:arrayList) {
+		for (Float name:arrayList) {
 			System.out.println(name);
 		}
 		return sortedList.equals(arrayList);

@@ -21,8 +21,8 @@ public class AbstractNopCommercePageUI {
 	public static final String DYNAMIC_DROPDOWN_LIST = "//select[@name='%s']";
 	
 	//product title
-	public static final String PRODUCT_TITLE = "//h2[@class='product-title']/a[text()='%s']";
+	public static final String PRODUCT_TITLE = "//h2[@class='product-title']/a";
 	
 	//product price
-	public static final String PRODUCT_PRICE = "//div[@class='price'//span]";
+	public static final String PRODUCT_PRICE = "//div[@class='prices']//span";
 }

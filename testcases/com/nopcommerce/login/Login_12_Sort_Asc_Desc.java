@@ -51,6 +51,9 @@ public class Login_12_Sort_Asc_Desc extends AbstractTest {
 	 
 	 verifyTrue(desktopPage.isPriceDataSortedAscendingNop(driver));
 	 
+     desktopPage.selectDropdownByName(driver, "products-orderby", "Price: High to Low");
+	 
+	 verifyTrue(desktopPage.isPriceDataSortedDescendingNop(driver));
 	  
   }
   
