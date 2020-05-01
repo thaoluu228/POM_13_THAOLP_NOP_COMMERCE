@@ -94,6 +94,7 @@ public class Payment_01_PaymentWorkFlow extends AbstractTest {
 	@Test
 	public void TC_01_CreateNewCustomer() throws InterruptedException {
 		homePage.openBankGuruPage(driver, "New Customer");
+		log.info("Create a new customer");
 		newCustomerPage = PageGeneratorManager.getNewCustomerPage(driver);
 		newCustomerPage.clickToBankGuruRadioButton(driver, "f");
 
@@ -327,7 +328,7 @@ public class Payment_01_PaymentWorkFlow extends AbstractTest {
 		deleteCustomer.clickToBankGuruButton(driver, "Submit");
 		
 		verifyTrue(deleteCustomer.isAlertTextandAcceptAlert(driver, "Do you really want to delete this Customer?"));
-		verifyTrue(deleteCustomer.isAlertTextandAcceptAlert(driver, "Customer Deleted Sucessfully"));
+		verifyTrue(deleteCustomer.isAlertTextandAcceptAlert(driver, "Customer deleted Successfully"));
 
 	}
 
