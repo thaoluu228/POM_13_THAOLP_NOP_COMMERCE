@@ -1,0 +1,4 @@
+2020-05-03 14:44:36,154 INFO  com.nopcommerce.login.Login_12_Sort_Asc_Desc -  -------------------------- PASSED -------------------------- 
+2020-05-03 14:44:36,791 INFO  com.nopcommerce.login.Login_12_Sort_Asc_Desc -  -------------------------- PASSED -------------------------- 
+2020-05-03 14:44:39,338 INFO  com.nopcommerce.login.Login_12_Sort_Asc_Desc -  -------------------------- PASSED -------------------------- 
+2020-05-03 14:44:40,141 INFO  com.nopcommerce.login.Login_12_Sort_Asc_Desc -  -------------------------- PASSED -------------------------- 

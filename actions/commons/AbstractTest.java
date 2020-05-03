@@ -1,5 +1,6 @@
 package commons;
 
+import java.io.File;
 import java.util.Random;
 import java.util.concurrent.TimeUnit;
 
@@ -9,13 +10,17 @@ import org.joda.time.DateTime;
 import org.joda.time.DateTimeZone;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.firefox.FirefoxOptions;
+import org.openqa.selenium.firefox.FirefoxProfile;
 import org.testng.Assert;
 import org.testng.Reporter;
 
 public class AbstractTest {
 	private WebDriver driver;
 	protected final Log log;
+	private String rootFolder = System.getProperty("user.dir");
 	public AbstractTest() {
 		log = LogFactory.getLog(getClass());
 	}
@@ -24,10 +29,34 @@ public class AbstractTest {
 	
 	  if (browserName.equalsIgnoreCase("chrome")) {
 		  System.setProperty("webdriver.chrome.driver", "./resources/chromedriver");
-		  driver = new ChromeDriver ();		
+		  //disable log
+		  System.setProperty("webdriver.chrome.args", "--disable-logging");
+		  System.setProperty("webdriver.chrome.silentOutput", "true");
+		  
+		  ChromeOptions options = new ChromeOptions();
+		  options.addArguments("--incognito");
+		  //install plugin
+//		  File file = new File(rootFolder + "/Extension/google translate.crx");
+//		  options.addExtensions(file);
+		  
+		  driver = new ChromeDriver (options);		
+//		  driver = new ChromeDriver();
 	} else { 
 		  System.setProperty("webdriver.gecko.driver", "./resources/geckodriver 2");
-		  driver = new FirefoxDriver ();	
+		  //disable log
+		  System.setProperty(FirefoxDriver.SystemProperty.DRIVER_USE_MARIONETTE, "true");
+		  System.setProperty(FirefoxDriver.SystemProperty.BROWSER_LOGFILE, rootFolder + "/LogBrowser/Firefox.log");
+		  
+		  FirefoxOptions options = new FirefoxOptions();
+		  options.addArguments("-private");
+		//install plugin
+//		  FirefoxProfile profile = new FirefoxProfile();
+//		  File firefoxEx = new File(rootFolder + "/Extension/google_translate.xpi");
+//		  profile.addExtension(firefoxEx);
+//		  options.setProfile(profile);
+		  
+		  driver = new FirefoxDriver (options);	
+//		  driver = new FirefoxDriver();
 	}
 	  
 	  driver.get(autUrl);
