@@ -21,7 +21,7 @@
 		<test name="Run on Firefox">
 	<parameter name="browser" value="firefox"/>
 		<classes>
-			<class name="com.nopcommerce.login.Login_12_Sort_Asc_Desc" />
+			<class name="com.nopcommerce.login.Login_13_Data_Faker" />
 <!-- 		    <class name="com.nopcommerce.common.Common_01_RegisterToSystem" /> -->
 		</classes>
 	</test>
